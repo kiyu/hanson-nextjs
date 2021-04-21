@@ -15,9 +15,10 @@ export default function Students(props: Props): JSX.Element {
 }
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<{ props: Props }> => {
-  return Promise.resolve({
+  const res = {
     props: {
       pageName: 'this is pageName',
     },
-  });
+  };
+  return Promise.resolve(res);
 };
