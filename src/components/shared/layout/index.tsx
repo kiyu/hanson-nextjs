@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import GlobalHeader from '../global-header';
 import { styles } from './styles.css';
 
 export const siteTitle = 'Next.js Typescript テンプレート';
@@ -7,6 +8,7 @@ export default function Layout({ children }: { children: JSX.Element | JSX.Eleme
   return (
     <>
       <div className="container">
+        <GlobalHeader></GlobalHeader>
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="Next.js Typescript テンプレート" />
