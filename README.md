@@ -3,14 +3,17 @@ Next.js + Typescript でのハンズオン
 
 # API
 
+## students
+
 /api/students
+/src/shared/api/students
 
-## Params
+### Params
 
-### limit
+#### limit
 
 default 10
 
-### offset
+#### offset
 
 default 0
