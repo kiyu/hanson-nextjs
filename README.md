@@ -5,8 +5,7 @@ Next.js + Typescript でのハンズオン
 
 ## students
 
-/api/students
-/src/shared/api/students
+/api/students (/src/shared/api/students)
 
 ### Params
 

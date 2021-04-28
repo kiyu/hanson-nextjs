@@ -1,25 +1,22 @@
 import { GetServerSideProps } from 'next';
 import Layout from '../../components/shared/layout';
+import StudentsComponents from '../../components/shared/students/students';
 import { GetStudentsResponse } from '../../shared/api/students/response';
+import { adaptStudent } from '../../shared/adapters/adapt-student';
+import { Student } from '../../shared/models/student';
 
 //Propsの型を定義
 //GetStudentsResponse はAPIレスポンスの型そのものなので、表示用の型とは違う
 interface Props {
   total: number;
-  items: {
-    id: string;
-    name: string;
-    country: string;
-  }[];
+  items: Student[];
 }
 
 export default function Students(props: Props): JSX.Element {
   return (
     <Layout>
       <ul>
-        {props.items.map((item) => {
-          return <li key={item.id}>{item.name}</li>;
-        })}
+        <StudentsComponents students={props.items} />
       </ul>
     </Layout>
   );
@@ -27,7 +24,7 @@ export default function Students(props: Props): JSX.Element {
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<{ props: Props }> => {
   const searchParams = new URLSearchParams({
-    limit: '10',
+    limit: '50',
     offset: '0',
   });
 
@@ -38,6 +35,9 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{ props:
   const result: GetStudentsResponse = await res.json();
 
   return {
-    props: result,
+    props: {
+      total: result.total,
+      items: result.items.map(adaptStudent),
+    },
   };
 };
