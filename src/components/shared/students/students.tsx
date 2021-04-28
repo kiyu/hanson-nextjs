@@ -1,4 +1,3 @@
-import { Student } from '../../../shared/models/student';
 import { StudentViewModels } from './view-model';
 
 interface Props {
