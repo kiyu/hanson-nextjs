@@ -1,14 +1,15 @@
 import { Student } from '../../../shared/models/student';
+import { StudentViewModels } from './view-model';
 
 interface Props {
-  students: Student[];
+  viewModels: StudentViewModels;
 }
 
 export default function StudentsComponents(student: Props): JSX.Element {
   return (
     <>
       <ul>
-        {student.students.map((v) => {
+        {student.viewModels.toArray().map((v) => {
           return (
             <li key={v.id}>
               <p>firstName: {v.firstName}</p>
