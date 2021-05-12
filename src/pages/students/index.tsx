@@ -5,6 +5,8 @@ import { GetStudentsResponse } from '../../shared/api/students/response';
 import { adaptStudent } from '../../shared/adapters/adapt-student';
 import { Student } from '../../shared/models/student';
 import { StudentViewModels } from '../../components/shared/students/view-model';
+import SearchWindow from '../../components/shared/search-window';
+import { useState } from 'react';
 
 //Propsの型を定義
 //GetStudentsResponse はAPIレスポンスの型そのものなので、表示用の型とは違う
@@ -14,12 +16,17 @@ interface Props {
 }
 
 export default function Students(props: Props): JSX.Element {
-  const viewModels = new StudentViewModels(props.items);
-  const searched = viewModels.searchByName('Percy');
+  const originViewModels = new StudentViewModels(props.items);
+  const [viewModels, setViewModels] = useState<StudentViewModels>(new StudentViewModels(props.items));
+  const onChangeKeyword = (keyword: string) => {
+    const searched = originViewModels.searchByName(keyword);
+    setViewModels(searched);
+  };
   return (
     <Layout>
+      <SearchWindow onChangeKeyword={onChangeKeyword} />
       <ul>
-        <StudentsComponents viewModels={searched} />
+        <StudentsComponents viewModels={viewModels} />
       </ul>
     </Layout>
   );
