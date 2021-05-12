@@ -22,6 +22,7 @@ export default function Students(props: Props): JSX.Element {
     const searched = originViewModels.searchByName(keyword);
     setViewModels(searched);
   };
+
   return (
     <Layout>
       <SearchWindow onChangeKeyword={onChangeKeyword} />
